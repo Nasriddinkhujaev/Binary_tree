@@ -106,6 +106,9 @@ public class BinaryTree<E> {
         System.out.println(" ================================");
         System.out.println(exprBT3.inOrderTraverse()); // this one prints the in-order traversal
 
+        System.out.println(" ================================");
+        System.out.println(exprBT3.postOrderTraverse()); // this one prints the post-order traversal
+
     }
 
     
@@ -232,19 +235,23 @@ public class BinaryTree<E> {
     public String postOrderTraverse() {
 
         //add your code
-        
+        StringBuilder sb = new StringBuilder();
         //Hint: this method is similar to (not same as) the method:
         //    public String preOrderTraverse()
-        
-        return "";
+        postOrderTraverse(root, sb);
+        return sb.toString();
     }
 
     //add your private recursive counterpart for public wrapper above: public String postOrderTraverse()
-    private void postOrderTraverse(Node<E> currentRoot,
-            StringBuilder currentResultSB) {
+    private void postOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB) {
 
         //add your code
-        
+        if (currentRoot == null){
+            return;
+        }
+        postOrderTraverse(currentRoot.left, currentResultSB);
+        postOrderTraverse(currentRoot.right, currentResultSB);
+        currentResultSB.append(currentRoot.toString() + "  ");
         //Hint: this method is similar to (not the same) the method:
         //  private void preOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB)  
         //	Change the private recursive method for preorder traversal and make sure that in each level, 
