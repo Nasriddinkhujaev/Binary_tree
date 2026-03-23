@@ -102,6 +102,8 @@ public class BinaryTree<E> {
 
         System.out.println(" ================================");
         System.out.println(exprBT3.preOrderTraverse()); // this one prints the pre-order traversal string of the tree
+        
+        System.out.println(" ================================");
         System.out.println(exprBT3.inOrderTraverse()); // this one prints the in-order traversal
 
     }
@@ -166,24 +168,26 @@ public class BinaryTree<E> {
         return sb.toString();
     }
 
-    //add your private recursive counterpart for public wrapper above: public String preOrderTraverse()
-    private void preOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB) {
+    // add your private recursive counterpart for public wrapper above: public
+    // String preOrderTraverse()
+    private void preOrderTraverse(Node<E> currentRoot, StringBuilder currentResultSB) {
 
-        //add your code
-        if(currentRoot == null){
+        // add your code
+        if (currentRoot == null) {
             return;
         } else {
-            currentResultSB.append(currentRoot.toString()); // add the data of current node to buffer
             // process to next node by calling the function itself
             if (!(currentRoot.toString().equals(root.toString()))
-                || currentRoot != null) { // check if current node is not the root node or currentRoot is not null, if it's not, add 2 spaces before processing the next node 
+                    && currentRoot != null) { // check if current node is not the root node or currentRoot is not null,
+                                              // if it's not, add 2 spaces before processing the next node
                 currentResultSB.append("  ");
             }
+            currentResultSB.append(currentRoot.toString()); // add the data of current node to buffer
             preOrderTraverse(currentRoot.left, currentResultSB); // recursively traverse the left subtree
             preOrderTraverse(currentRoot.right, currentResultSB); // recursively traverse the right subtree
 
         }
-        
+
         //Hint: this method is very similar to the method below, which is already implemented
         //    private void preOrderTraverse(Node<E> node, int depth,StringBuilder sb)
         //	See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.
