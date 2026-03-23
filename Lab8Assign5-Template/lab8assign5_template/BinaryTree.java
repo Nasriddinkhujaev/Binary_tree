@@ -200,19 +200,24 @@ public class BinaryTree<E> {
     //public wrapper of inOrderTraverse.
     public String inOrderTraverse() {
         //add your code
-        
+        StringBuilder sb = new StringBuilder();
         //Hint: this method is similar to (not same as) the following method:
         //    public String preOrderTraverse()
-        
-        return "";
+        inOrderTraverse(root, sb);
+        return sb.toString();
     }
 
     //add your private recursive counterpart for the public wrapper above: public String inOrderTraverse()
-    private void inOrderTraverse(Node<E> currentRoot,
-            StringBuilder currentResultSB) {
+    private void inOrderTraverse(Node<E> currentRoot, StringBuilder currentResultSB) {
 
         //add your code
+        if (currentRoot == null) {
+            return;
+        } 
+        inOrderTraverse(currentRoot.left, currentResultSB);
+        currentResultSB.append(currentRoot.toString() + "  ");
         
+        inOrderTraverse(currentRoot.right, currentResultSB);
         //Hint: this method is similar to (not the same) the method:
         //  private void preOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB)        
         //	Change the private recursive method for preordertraverse and make sure that in each level, 
@@ -488,7 +493,7 @@ public class BinaryTree<E> {
      * @param scan the Scanner attached to the input file
      * @return The binary tree
      */
-    public static BinaryTree<String> readBinaryTree(Scanner scan) {
+    public static BinaryTree<String> readBinaryTree(Scanner scan) { // the pur
         // Read a line and trim leading and trailing spaces.
         String data = scan.nextLine().trim();
         if (data.equals("null")) { //data (i.e. current root node's data) is "null"
