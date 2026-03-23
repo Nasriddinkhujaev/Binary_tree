@@ -49,7 +49,61 @@ public class BinaryTree<E> {
         //add more code to create the expression BT in Fig 6.12 on P.271
         //Hint: construct the tree by 
         //   starting with leaves and moving up to the root of the entire tree.     
-        //   call toString() to verify the tree structure        
+        //   call toString() to verify the tree structure     
+        
+        /*
+        so far we have created the following tree: 
+        BT exprBT2: 
+        root: +
+        left child of +: x
+        right child of +: y
+        
+        1. just for visualizing, write BT in array form
+        final exptBT in array form:
+        [[*], [+, /], [x, y, a, b], [null, null, null, null, null, null, null, null]]
+        
+// The above code is representing a binary expression tree in Java. The tree structure is as follows:
+        the tree will look like this:
+        //        '*'
+        //       /   \
+        //     '+'   '/'
+        //     / \    /  \
+        //   'x' 'y' 'a' 'b'
+        
+        2. start from leaves and move up to the root of the entire tree:
+        
+        */
+
+        // leaves a and b
+        Node<Character> a = new Node<>('a');
+        Node<Character> b = new Node<>('b');
+
+        // create node '/'
+        Node<Character> divide = new Node<>('/');
+
+        // assigning a and b as children of '/'
+        divide.left = a;
+        divide.right = b;
+
+        // create a node '*' 
+        Node<Character> multiply = new Node<>('*');
+
+        // assign left and right of '*'
+        multiply.left = plus;
+        multiply.right = divide;
+
+        // create the binary tree with root '*'
+        BinaryTree<Character> exprBT3 = new BinaryTree<>();
+        exprBT3.root = multiply;
+
+        // finally print out the tree with toString()
+        System.out.println(exprBT3); // this one prints default toString
+        System.out.println(exprBT3.toString()); // this one prints overridden toString()
+
+        System.out.println(" ================================");
+        System.out.println(exprBT3.preOrderTraverse()); // this one prints the pre-order traversal string of the tree
+        System.out.println(exprBT3.inOrderTraverse()); // this one prints the in-order traversal
+
     }
 
     
@@ -75,8 +129,7 @@ public class BinaryTree<E> {
      * @param depth The depth of the local root
      * @param sb The string buffer to save the output
      */
-    private void preOrderTraverse(Node<E> node, int depth,
-            StringBuilder sb) {
+    private void preOrderTraverse(Node<E> node, int depth, StringBuilder sb) {
         //add a number of spaces that is proportial to the depth value
         for (int i = 1; i < depth; i++) {
             sb.append("  ");
@@ -104,18 +157,32 @@ public class BinaryTree<E> {
     //public wrapper of preOrderTraverse.
     public String preOrderTraverse() {
         //add your code
-        
+        StringBuilder sb = new StringBuilder();
+        // calling the private recursive method to do the real job
+        preOrderTraverse(root,  sb);
         //Hint: this method is similar to (not the same) the following method, which is already implemented:
         // public String toString()
         
-        return "";
+        return sb.toString();
     }
 
     //add your private recursive counterpart for public wrapper above: public String preOrderTraverse()
-    private void preOrderTraverse(Node<E> currentRoot,
-            StringBuilder currentResultSB) {
+    private void preOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB) {
 
         //add your code
+        if(currentRoot == null){
+            return;
+        } else {
+            currentResultSB.append(currentRoot.toString()); // add the data of current node to buffer
+            // process to next node by calling the function itself
+            if (!(currentRoot.toString().equals(root.toString()))
+                || currentRoot != null) { // check if current node is not the root node or currentRoot is not null, if it's not, add 2 spaces before processing the next node 
+                currentResultSB.append("  ");
+            }
+            preOrderTraverse(currentRoot.left, currentResultSB); // recursively traverse the left subtree
+            preOrderTraverse(currentRoot.right, currentResultSB); // recursively traverse the right subtree
+
+        }
         
         //Hint: this method is very similar to the method below, which is already implemented
         //    private void preOrderTraverse(Node<E> node, int depth,StringBuilder sb)
@@ -434,3 +501,5 @@ public class BinaryTree<E> {
     /*</listing>*/
 }
 /*</listing>*/
+
+

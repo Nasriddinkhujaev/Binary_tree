@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * @author Your name
+ * @author Mukhammad Nasriddinkhujaev 
  */
 public class ReadBinaryTreeTest {
 
