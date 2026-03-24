@@ -323,21 +323,18 @@ public class BinarySearchTree<E extends Comparable<E>>
                 // localRoot has 2 children, replace the item to delete
                 // with its inorder successor (i.e. smallest in right subtree,
                 //   also the leftmost in right subtree)
-                
-                //The code is very similar to what's in the private delete method
-                
-                //a. handle the easier case: 
-                //     data in right child is the smallest in right subtree
-                //     (no need to search)
-                //b. handle the more general case:
-                //     data in right child is not the smallest in right subtree,
-                //     need to call findSmallestChild to locate this item,
-                //         remove this item, and return this item (minInTR).
-                //     then replace the data in localRoot by this item: minInTR.
-                
-                //Note: following line is a stub used to silent compiler. 
-                //   You need to change it when you complete your work.
-                return null;
+                if (localRoot.right.left == null) {
+                    // The right child has no left child.
+                    // Replace the local root data with the data in the right child.
+                    localRoot.data = localRoot.right.data;
+                    // Replace the right child with right child's right child.
+                    localRoot.right = localRoot.right.right;
+                    return localRoot;
+                } else {
+                    // Search for the inorder successor and replace deleted node's data with it.
+                    localRoot.data = findSmallestChild(localRoot.right);
+                    return localRoot;
+                }
             }
         }
     }
@@ -357,7 +354,8 @@ public class BinarySearchTree<E extends Comparable<E>>
         if (parent.left.left == null) {
             //left child is the smallest item in this BST rooted at parent
             E returnValue = parent.left.data;
-            
+            // Remove the smallest item by replacing it with its right child
+            parent.left = parent.left.right;
             return returnValue;
         } else{
             return findSmallestChild(parent.left);
@@ -369,7 +367,7 @@ public class BinarySearchTree<E extends Comparable<E>>
         
         //Note: following line is a stub used to silent compiler. 
         //   You need to change it when you complete your work.
-        
+
 
     }
 
@@ -387,8 +385,8 @@ public class BinarySearchTree<E extends Comparable<E>>
      * @post target is not in the tree
      */
     public boolean remove(E target) {
-        //to be implemented by Students
-        return false;
+        E result = delete(target);
+        return result != null;
     }
 
     /**
@@ -397,8 +395,7 @@ public class BinarySearchTree<E extends Comparable<E>>
      * @return true If the item is in the tree, false otherwise
      */
     public boolean contains(E target) {
-        //to be implemented by Students
-        return false;
+        return find(target) != null;
     }
 
 }
