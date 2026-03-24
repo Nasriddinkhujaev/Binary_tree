@@ -109,6 +109,9 @@ public class BinaryTree<E> {
         System.out.println(" ================================");
         System.out.println(exprBT3.postOrderTraverse()); // this one prints the post-order traversal
 
+        System.out.println(" ================================");
+        System.out.println(exprBT3.size());
+
     }
 
     
@@ -264,38 +267,36 @@ public class BinaryTree<E> {
     //public wrapper of size().
     public int size() {
         //add your code
-        
+        int treeSize = size(root);
         //Hint: need to call its private recursive counterpart accordingly
         
-        return 0;
+        return treeSize;
+        
     }
 
     //add your private recursive counterpart for the public wrapper: public int size()
     private int size(Node<E> currentRoot) {
-        //add your code  
-        
+        // base case: empty subtree has size 0
+        if (currentRoot == null) {
+            return 0;
+        }
+
+        // recursively compute the size of left and right subtrees (post-order style)
+        int leftSize = size(currentRoot.left);
+        int rightSize = size(currentRoot.right);
+
+        // total size is 1 (for currentRoot) plus sizes of both subtrees
+        return 1 + leftSize + rightSize;
         //Hint
         //• In the private recursive version, you need to know the size of the two subtrees 
         //      before knowing the size of the entire tree.
         //• Use post order traversal
-    
-        return 0;
-    }    
-    
-    //Return the height of this BinaryTree.
-    //public wrapper of height.
-    public int height() {
-        //add your code
-        
-        //Hint: need to call its private recursive counterpart accordingly        
-        
-        return 0;
     }
 
     //add your private recursive counterpart for height
     private int height(Node<E> currentRoot) {
         //add your code        
-
+        
         //Hint
         //• In the private recursive version, you need to know the heights of the two subtrees 
         //      before knowing the height of the entire tree.
