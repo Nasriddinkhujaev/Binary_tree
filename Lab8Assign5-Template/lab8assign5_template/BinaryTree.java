@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Class for a binary tree that stores type E objects.
  *
- * @author Koffman and Wolfgang & Cindy & Your Name
+ * @author Koffman and Wolfgang & Cindy & Mukhammad
  *
  */
 public class BinaryTree<E> {
