@@ -17,62 +17,63 @@ import java.util.Scanner;
 public class BinaryTree<E> {
 
     public static void main(String[] args) {
-        //create the expression tree in Fig 6.12 by directly creating the nodes
-        //  and directly connecting them accordingly
+        // create the expression tree in Fig 6.12 by directly creating the nodes
+        // and directly connecting them accordingly
 
-        //create 2 leaf nodes
+        // create 2 leaf nodes
         Node<Character> x = new Node<>('x');
         Node<Character> y = new Node<>('y');
-        //create the parent node of x and y:
+        // create the parent node of x and y:
         Node<Character> plus = new Node<>('+');
-        //connect + and x, y:
+        // connect + and x, y:
         plus.left = x;
         plus.right = y;
-        //by now the following tree is created:
-        //     '+'
-        //    /   \
-        //  'x'   'y'
+        // by now the following tree is created:
+        // '+'
+        // / \
+        // 'x' 'y'
 
-        //create a binary tree named exprBT that is rooted at +
+        // create a binary tree named exprBT that is rooted at +
         BinaryTree<Character> exprBT = new BinaryTree<>(plus);
-        //or:
-        //create an empty binary tree: exprBT
+        // or:
+        // create an empty binary tree: exprBT
         BinaryTree<Character> exprBT2 = new BinaryTree<>();
-        //make + as the root of the BT: exprBT       
+        // make + as the root of the BT: exprBT
         exprBT2.root = plus;
-        //call toString() to verify the tree structure
+        // call toString() to verify the tree structure
         System.out.println(exprBT);
         System.out.println(exprBT2.toString());
 
-        //----Lab8Assign5 Start------//
-        //2.1
-        //add more code to create the expression BT in Fig 6.12 on P.271
-        //Hint: construct the tree by 
-        //   starting with leaves and moving up to the root of the entire tree.     
-        //   call toString() to verify the tree structure     
-        
+        // ----Lab8Assign5 Start------//
+        // 2.1
+        // add more code to create the expression BT in Fig 6.12 on P.271
+        // Hint: construct the tree by
+        // starting with leaves and moving up to the root of the entire tree.
+        // call toString() to verify the tree structure
+
         /*
-        so far we have created the following tree: 
-        BT exprBT2: 
-        root: +
-        left child of +: x
-        right child of +: y
-        
-        1. just for visualizing, write BT in array form
-        final exptBT in array form:
-        [[*], [+, /], [x, y, a, b], [null, null, null, null, null, null, null, null]]
-        
-// The above code is representing a binary expression tree in Java. The tree structure is as follows:
-        the tree will look like this:
-        //        '*'
-        //       /   \
-        //     '+'   '/'
-        //     / \    /  \
-        //   'x' 'y' 'a' 'b'
-        
-        2. start from leaves and move up to the root of the entire tree:
-        
-        */
+         * so far we have created the following tree:
+         * BT exprBT2:
+         * root: +
+         * left child of +: x
+         * right child of +: y
+         * 
+         * 1. just for visualizing, write BT in array form
+         * final exptBT in array form:
+         * [[*], [+, /], [x, y, a, b], [null, null, null, null, null, null, null, null]]
+         * 
+         * // The above code is representing a binary expression tree in Java. The tree
+         * structure is as follows:
+         * the tree will look like this:
+         * // '*'
+         * // / \
+         * // '+' '/'
+         * // / \ / \
+         * // 'x' 'y' 'a' 'b'
+         * 
+         * 2. start from leaves and move up to the root of the entire tree:
+         * 
+         */
 
         // leaves a and b
         Node<Character> a = new Node<>('a');
@@ -85,7 +86,7 @@ public class BinaryTree<E> {
         divide.left = a;
         divide.right = b;
 
-        // create a node '*' 
+        // create a node '*'
         Node<Character> multiply = new Node<>('*');
 
         // assign left and right of '*'
@@ -102,7 +103,7 @@ public class BinaryTree<E> {
 
         System.out.println(" ================================");
         System.out.println(exprBT3.preOrderTraverse()); // this one prints the pre-order traversal string of the tree
-        
+
         System.out.println(" ================================");
         System.out.println(exprBT3.inOrderTraverse()); // this one prints the in-order traversal
 
@@ -112,10 +113,10 @@ public class BinaryTree<E> {
         System.out.println(" ================================");
         System.out.println(exprBT3.size());
 
+        System.out.println(" ================================");
+        System.out.println(exprBT3.height());
     }
 
-    
-    
     /**
      * get a string containing all data items in this binary tree. The string is
      * a preorder traversal sequence of this binary tree.
@@ -125,7 +126,7 @@ public class BinaryTree<E> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        //call the private recursive method to do the real job.
+        // call the private recursive method to do the real job.
         preOrderTraverse(root, 1, sb);
         return sb.toString();
     }
@@ -133,44 +134,45 @@ public class BinaryTree<E> {
     /**
      * Perform a preorder traversal of the binary tree rooted at node.
      *
-     * @param node The local root (i.e. the current root node)
+     * @param node  The local root (i.e. the current root node)
      * @param depth The depth of the local root
-     * @param sb The string buffer to save the output
+     * @param sb    The string buffer to save the output
      */
     private void preOrderTraverse(Node<E> node, int depth, StringBuilder sb) {
-        //add a number of spaces that is proportial to the depth value
+        // add a number of spaces that is proportial to the depth value
         for (int i = 1; i < depth; i++) {
             sb.append("  ");
         }
-        if (node == null) {         //current root node does not exist
+        if (node == null) { // current root node does not exist
             sb.append("null\n");
         } else {
-            sb.append(node.toString()); //add current root node's data
+            sb.append(node.toString()); // add current root node's data
             sb.append("\n");
-            //recursively preorder traverse the left subtree of current root node
+            // recursively preorder traverse the left subtree of current root node
             preOrderTraverse(node.left, depth + 1, sb);
-            //recursively preorder traverse the right subtree of current root node            
+            // recursively preorder traverse the right subtree of current root node
             preOrderTraverse(node.right, depth + 1, sb);
         }
-    }    
-    
-    
-    //HINT:
-    //  Try to complete the methods in the listed order
+    }
 
+    // HINT:
+    // Try to complete the methods in the listed order
 
-    //Return the preorder traversal string of all items stored in this BinaryTree.
-    //The return string MUST separate each two adjacent values by 2 spaces, not by newline character ‘\n’
-    //	returns a string in this format: "house  dog  cat  kiss  man" for the tree in file WordBT_Data.txt.
-    //public wrapper of preOrderTraverse.
+    // Return the preorder traversal string of all items stored in this BinaryTree.
+    // The return string MUST separate each two adjacent values by 2 spaces, not by
+    // newline character ‘\n’
+    //  returns a string in this format: "house dog cat kiss man" for the tree in
+    // file WordBT_Data.txt.
+    // public wrapper of preOrderTraverse.
     public String preOrderTraverse() {
-        //add your code
+        // add your code
         StringBuilder sb = new StringBuilder();
         // calling the private recursive method to do the real job
-        preOrderTraverse(root,  sb);
-        //Hint: this method is similar to (not the same) the following method, which is already implemented:
+        preOrderTraverse(root, sb);
+        // Hint: this method is similar to (not the same) the following method, which is
+        // already implemented:
         // public String toString()
-        
+
         return sb.toString();
     }
 
@@ -183,9 +185,7 @@ public class BinaryTree<E> {
             return;
         } else {
             // process to next node by calling the function itself
-            if (!(currentRoot.toString().equals(root.toString()))
-                    && currentRoot != null) { // check if current node is not the root node or currentRoot is not null,
-                                              // if it's not, add 2 spaces before processing the next node
+            if (currentRoot != root && currentRoot != null) { // check if current node is not the root node or currentRoot is not null, if it's not, add 2 spaces before processing the next node
                 currentResultSB.append("  ");
             }
             currentResultSB.append(currentRoot.toString()); // add the data of current node to buffer
@@ -194,87 +194,101 @@ public class BinaryTree<E> {
 
         }
 
-        //Hint: this method is very similar to the method below, which is already implemented
-        //    private void preOrderTraverse(Node<E> node, int depth,StringBuilder sb)
-        //	See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.
-        
+        // Hint: this method is very similar to the method below, which is already
+        // implemented
+        // private void preOrderTraverse(Node<E> node, int depth,StringBuilder sb)
+        //  See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.
+
     }
 
-    //Return the inorder traversal string of all items stored in this BinaryTree.
-    //The return string MUST separate each two adjacent values by 2 spaces, not by newline character ‘\n’.  
-    //	returns a string in this format: " cat  dog  house  kiss  man" for the tree in file WordBT_Data.txt.
-    //public wrapper of inOrderTraverse.
+    // Return the inorder traversal string of all items stored in this BinaryTree.
+    // The return string MUST separate each two adjacent values by 2 spaces, not by
+    // newline character ‘\n’.
+    //  returns a string in this format: " cat dog house kiss man" for the tree in
+    // file WordBT_Data.txt.
+    // public wrapper of inOrderTraverse.
     public String inOrderTraverse() {
-        //add your code
+        // add your code
         StringBuilder sb = new StringBuilder();
-        //Hint: this method is similar to (not same as) the following method:
-        //    public String preOrderTraverse()
+        // Hint: this method is similar to (not same as) the following method:
+        // public String preOrderTraverse()
         inOrderTraverse(root, sb);
         return sb.toString();
     }
 
-    //add your private recursive counterpart for the public wrapper above: public String inOrderTraverse()
+    // add your private recursive counterpart for the public wrapper above: public
+    // String inOrderTraverse()
     private void inOrderTraverse(Node<E> currentRoot, StringBuilder currentResultSB) {
 
-        //add your code
+        // add your code
         if (currentRoot == null) {
             return;
-        } 
+        }
         inOrderTraverse(currentRoot.left, currentResultSB);
         currentResultSB.append(currentRoot.toString() + "  ");
-        
+
         inOrderTraverse(currentRoot.right, currentResultSB);
-        //Hint: this method is similar to (not the same) the method:
-        //  private void preOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB)        
-        //	Change the private recursive method for preordertraverse and make sure that in each level, 
-        //          the current root is visited after the left subtree is visited and before the right subtree is visited.
-        //	See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.       
+        // Hint: this method is similar to (not the same) the method:
+        // private void preOrderTraverse(Node<E> currentRoot,StringBuilder
+        // currentResultSB)
+        //  Change the private recursive method for preordertraverse and make sure that
+        // in each level,
+        // the current root is visited after the left subtree is visited and before the
+        // right subtree is visited.
+        //  See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.
     }
-    
-    //Return the postorder traversal string of all items stored in this BinaryTree.
-    //The return string MUST separate each two adjacent values by 2 spaces, not by newline character ‘\n’.
-    //	returns a string in this format: " cat  dog  man  kiss  house " for the tree in file WordBT_Data.txt.
-    //public wrapper of postOrderTraverse.
+
+    // Return the postorder traversal string of all items stored in this BinaryTree.
+    // The return string MUST separate each two adjacent values by 2 spaces, not by
+    // newline character ‘\n’.
+    //  returns a string in this format: " cat dog man kiss house " for the tree in
+    // file WordBT_Data.txt.
+    // public wrapper of postOrderTraverse.
     public String postOrderTraverse() {
 
-        //add your code
+        // add your code
         StringBuilder sb = new StringBuilder();
-        //Hint: this method is similar to (not same as) the method:
-        //    public String preOrderTraverse()
+        // Hint: this method is similar to (not same as) the method:
+        // public String preOrderTraverse()
         postOrderTraverse(root, sb);
         return sb.toString();
     }
 
-    //add your private recursive counterpart for public wrapper above: public String postOrderTraverse()
-    private void postOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB) {
+    // add your private recursive counterpart for public wrapper above: public
+    // String postOrderTraverse()
+    private void postOrderTraverse(Node<E> currentRoot, StringBuilder currentResultSB) {
 
-        //add your code
-        if (currentRoot == null){
+        // add your code
+        if (currentRoot == null) {
             return;
         }
         postOrderTraverse(currentRoot.left, currentResultSB);
         postOrderTraverse(currentRoot.right, currentResultSB);
         currentResultSB.append(currentRoot.toString() + "  ");
-        //Hint: this method is similar to (not the same) the method:
-        //  private void preOrderTraverse(Node<E> currentRoot,StringBuilder currentResultSB)  
-        //	Change the private recursive method for preorder traversal and make sure that in each level, 
-        //         the current root is visited after both the left subtree and the right subtree are visited.
-        //	See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.        
+        // Hint: this method is similar to (not the same) the method:
+        // private void preOrderTraverse(Node<E> currentRoot,StringBuilder
+        // currentResultSB)
+        //  Change the private recursive method for preorder traversal and make sure
+        // that in each level,
+        // the current root is visited after both the left subtree and the right subtree
+        // are visited.
+        //  See pseudocode in file: BT-Traversal.pdf attached to Assign5 canvas page.
     }
 
-    //traversal-based processing of BT
-    //return the total number of data items in this BinaryTree
-    //public wrapper of size().
+    // traversal-based processing of BT
+    // return the total number of data items in this BinaryTree
+    // public wrapper of size().
     public int size() {
-        //add your code
+        // add your code
         int treeSize = size(root);
-        //Hint: need to call its private recursive counterpart accordingly
-        
+        // Hint: need to call its private recursive counterpart accordingly
+
         return treeSize;
-        
+
     }
 
-    //add your private recursive counterpart for the public wrapper: public int size()
+    // add your private recursive counterpart for the public wrapper: public int
+    // size()
     private int size(Node<E> currentRoot) {
         // base case: empty subtree has size 0
         if (currentRoot == null) {
@@ -287,28 +301,46 @@ public class BinaryTree<E> {
 
         // total size is 1 (for currentRoot) plus sizes of both subtrees
         return 1 + leftSize + rightSize;
-        //Hint
-        //• In the private recursive version, you need to know the size of the two subtrees 
-        //      before knowing the size of the entire tree.
-        //• Use post order traversal
+        // Hint
+        // • In the private recursive version, you need to know the size of the two
+        // subtrees
+        // before knowing the size of the entire tree.
+        // • Use post order traversal
     }
 
-    //add your private recursive counterpart for height
+    public int height() { // this wrapper was missing from the original template
+        int treeHeight = height(root);
+
+        return treeHeight;
+    }
+
+    // add your private recursive counterpart for height
     private int height(Node<E> currentRoot) {
-        //add your code        
+        // add your code
         
-        //Hint
-        //• In the private recursive version, you need to know the heights of the two subtrees 
-        //      before knowing the height of the entire tree.
-        //• Use post order traversal     
-        
-        return 0;
-    }    
-    
-    //--------Lab8Assign5 End ---------//
-    
-    
-    /*<listing chapter="6" number="1">*/
+        if (currentRoot == null) {
+            return 0;
+        }
+
+        int left = height(currentRoot.left);
+        int right = height(currentRoot.right);
+        // Hint
+        // • In the private recursive version, you need to know the heights of the two
+        // subtrees
+        // before knowing the height of the entire tree.
+        // • Use post order traversal
+        int treeHeight;
+        if (left >= right) {
+            treeHeight = left + 1;
+        } else {
+            treeHeight = right + 1;
+        }
+        return treeHeight;
+    }
+
+    // --------Lab8Assign5 End ---------//
+
+    /* <listing chapter="6" number="1"> */
     /**
      * Class to encapsulate a tree node.
      */
@@ -334,8 +366,9 @@ public class BinaryTree<E> {
          *
          * @param data The data to store in this node
          */
-        //This constructor should be protected, not public,
-        // because classes that are not subclasses of BinaryTree do not directly use Node.
+        // This constructor should be protected, not public,
+        // because classes that are not subclasses of BinaryTree do not directly use
+        // Node.
         protected Node(E data) {
             this.data = data;
             left = null;
@@ -348,20 +381,21 @@ public class BinaryTree<E> {
          *
          * @return A string representation of the data fields
          */
-        //must be public because it overrides what's in class Object.
+        // must be public because it overrides what's in class Object.
         @Override
         public String toString() {
             return data.toString();
         }
     }
-    /*</listing>*/
+    /* </listing> */
 
     // Data Field
     /**
      * The root of the binary tree
      */
-    //use the access modifier protected to give family member classes the direct access
-    //   to the root data field.
+    // use the access modifier protected to give family member classes the direct
+    // access
+    // to the root data field.
     protected Node<E> root;
 
     /**
@@ -377,8 +411,10 @@ public class BinaryTree<E> {
      *
      * @param root The node that is the root of the tree.
      */
-    //Use the access modifier protected because we want to hide details of Node class
-    //   from non-family member classes (i.e. classes that are not subclasses of BinaryTree).
+    // Use the access modifier protected because we want to hide details of Node
+    // class
+    // from non-family member classes (i.e. classes that are not subclasses of
+    // BinaryTree).
     protected BinaryTree(Node<E> root) {
         this.root = root;
     }
@@ -389,16 +425,16 @@ public class BinaryTree<E> {
      */
     public BinaryTree(E data, BinaryTree<E> leftTree,
             BinaryTree<E> rightTree) {
-        root = new Node<E>(data);           //new node: right, left are both null
+        root = new Node<E>(data); // new node: right, left are both null
         if (leftTree != null) {
             root.left = leftTree.root;
         } else {
-            root.left = null;               //don't have to do this, root.left is already null
+            root.left = null; // don't have to do this, root.left is already null
         }
         if (rightTree != null) {
             root.right = rightTree.root;
         } else {
-            root.right = null;              //don't have to do this, root.right is already null.
+            root.right = null; // don't have to do this, root.right is already null.
         }
     }
 
@@ -406,10 +442,10 @@ public class BinaryTree<E> {
      * Return the left subtree.
      *
      * @return The left subtree or null if either the root or the left subtree
-     * is null
+     *         is null
      */
     public BinaryTree<E> getLeftSubtree() {
-        if (root != null && root.left != null) { //if there is a left subtree
+        if (root != null && root.left != null) { // if there is a left subtree
             return new BinaryTree<E>(root.left);
         } else {
             return null;
@@ -420,10 +456,10 @@ public class BinaryTree<E> {
      * Return the right sub-tree
      *
      * @return the right sub-tree or null if either the root or the right
-     * subtree is null.
+     *         subtree is null.
      */
     public BinaryTree<E> getRightSubtree() {
-        if (root != null && root.right != null) {   //if there is a right subtree
+        if (root != null && root.right != null) { // if there is a right subtree
             return new BinaryTree<E>(root.right);
         } else {
             return null;
@@ -449,74 +485,75 @@ public class BinaryTree<E> {
      * @return true if the root has no children
      */
     public boolean isLeaf() {
-        //empty tree or 1-node tree
+        // empty tree or 1-node tree
         return (root == null || (root.left == null && root.right == null));
     }
 
-//    /**
-//     * get a string containing all data items in this binary tree. The string is
-//     * a preorder traversal sequence of this binary tree.
-//     *
-//     * @return the preorder traversal sequence of this binary tree as a string.
-//     */
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        //call the private recursive method to do the real job.
-//        preOrderTraverse(root, 1, sb);
-//        return sb.toString();
-//    }
-//
-//    /**
-//     * Perform a preorder traversal of the binary tree rooted at node.
-//     *
-//     * @param node The local root (i.e. the current root node)
-//     * @param depth The depth of the local root
-//     * @param sb The string buffer to save the output
-//     */
-//    private void preOrderTraverse(Node<E> node, int depth,
-//            StringBuilder sb) {
-//        //add a number of spaces that is proportial to the depth value
-//        for (int i = 1; i < depth; i++) {
-//            sb.append("  ");
-//        }
-//        if (node == null) {         //current root node does not exist
-//            sb.append("null\n");
-//        } else {
-//            sb.append(node.toString()); //add current root node's data
-//            sb.append("\n");
-//            //recursively preorder traverse the left subtree of current root node
-//            preOrderTraverse(node.left, depth + 1, sb);
-//            //recursively preorder traverse the right subtree of current root node            
-//            preOrderTraverse(node.right, depth + 1, sb);
-//        }
-//    }
+    // /**
+    // * get a string containing all data items in this binary tree. The string is
+    // * a preorder traversal sequence of this binary tree.
+    // *
+    // * @return the preorder traversal sequence of this binary tree as a string.
+    // */
+    // @Override
+    // public String toString() {
+    // StringBuilder sb = new StringBuilder();
+    // //call the private recursive method to do the real job.
+    // preOrderTraverse(root, 1, sb);
+    // return sb.toString();
+    // }
+    //
+    // /**
+    // * Perform a preorder traversal of the binary tree rooted at node.
+    // *
+    // * @param node The local root (i.e. the current root node)
+    // * @param depth The depth of the local root
+    // * @param sb The string buffer to save the output
+    // */
+    // private void preOrderTraverse(Node<E> node, int depth,
+    // StringBuilder sb) {
+    // //add a number of spaces that is proportial to the depth value
+    // for (int i = 1; i < depth; i++) {
+    // sb.append(" ");
+    // }
+    // if (node == null) { //current root node does not exist
+    // sb.append("null\n");
+    // } else {
+    // sb.append(node.toString()); //add current root node's data
+    // sb.append("\n");
+    // //recursively preorder traverse the left subtree of current root node
+    // preOrderTraverse(node.left, depth + 1, sb);
+    // //recursively preorder traverse the right subtree of current root node
+    // preOrderTraverse(node.right, depth + 1, sb);
+    // }
+    // }
 
-    /*<listing chapter="6" number="2">*/
+    /* <listing chapter="6" number="2"> */
     /**
      * Method to read a binary tree.
      *
      * @pre The input consists of a preorder traversal of the binary tree. The
-     * line "null" indicates a null tree.
+     *      line "null" indicates a null tree.
      * @param scan the Scanner attached to the input file
      * @return The binary tree
      */
     public static BinaryTree<String> readBinaryTree(Scanner scan) { // the pur
         // Read a line and trim leading and trailing spaces.
         String data = scan.nextLine().trim();
-        if (data.equals("null")) { //data (i.e. current root node's data) is "null"
+        if (data.equals("null")) { // data (i.e. current root node's data) is "null"
             return null;
         } else {
-            //recursively keep reading and building the left subtree of current root node until it's done.
+            // recursively keep reading and building the left subtree of current root node
+            // until it's done.
             BinaryTree<String> leftTree = readBinaryTree(scan);
-            //recursively keep reading and building the right subtree of current root node until it's done.
+            // recursively keep reading and building the right subtree of current root node
+            // until it's done.
             BinaryTree<String> rightTree = readBinaryTree(scan);
-            //build and return a new binary tree that has root data in variable data, leftTree as left subtree, rightTree as right subtree.
+            // build and return a new binary tree that has root data in variable data,
+            // leftTree as left subtree, rightTree as right subtree.
             return new BinaryTree<String>(data, leftTree, rightTree);
         }
     }
-    /*</listing>*/
+    /* </listing> */
 }
-/*</listing>*/
-
-
+/* </listing> */
