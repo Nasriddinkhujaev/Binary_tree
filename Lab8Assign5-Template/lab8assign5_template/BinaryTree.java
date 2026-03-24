@@ -114,10 +114,10 @@ public class BinaryTree<E> {
         System.out.println(exprBT3.size());
 
         System.out.println(" ================================");
-        System.out.println(exprBT3.height());
+        System.out.println(exprBT3.depth());
 
         System.out.println(" ================================");
-        System.out.println(BinaryTree.readBinaryTree(new Scanner(System.in))); // system.in is 
+        System.out.println(BinaryTree.readBinaryTree(new Scanner(System.in))); // system.in is
     }
 
     /**
@@ -176,7 +176,7 @@ public class BinaryTree<E> {
         // already implemented:
         // public String toString()
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     // add your private recursive counterpart for public wrapper above: public
@@ -218,7 +218,7 @@ public class BinaryTree<E> {
         // Hint: this method is similar to (not same as) the following method:
         // public String preOrderTraverse()
         inOrderTraverse(root, sb);
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     // add your private recursive counterpart for the public wrapper above: public
@@ -256,7 +256,7 @@ public class BinaryTree<E> {
         // Hint: this method is similar to (not same as) the method:
         // public String preOrderTraverse()
         postOrderTraverse(root, sb);
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     // add your private recursive counterpart for public wrapper above: public
@@ -313,26 +313,26 @@ public class BinaryTree<E> {
         // • Use post order traversal
     }
 
-    public int height() { // this wrapper was missing from the original template
-        int treeHeight = height(root);
+    public int depth() { // this wrapper was missing from the original template
+        int treeHeight = depth(root);
 
         return treeHeight;
     }
 
-    // add your private recursive counterpart for height
-    private int height(Node<E> currentRoot) {
+    // add your private recursive counterpart for depth
+    private int depth(Node<E> currentRoot) {
         // add your code
 
         if (currentRoot == null) {
             return 0;
         }
 
-        int left = height(currentRoot.left);
-        int right = height(currentRoot.right);
+        int left = depth(currentRoot.left);
+        int right = depth(currentRoot.right);
         // Hint
-        // • In the private recursive version, you need to know the heights of the two
+        // • In the private recursive version, you need to know the depths of the two
         // subtrees
-        // before knowing the height of the entire tree.
+        // before knowing the depth of the entire tree.
         // • Use post order traversal
         int treeHeight;
         if (left >= right) {

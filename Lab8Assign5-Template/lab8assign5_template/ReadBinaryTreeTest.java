@@ -46,7 +46,7 @@ public class ReadBinaryTreeTest {
       System.out.println("Inorder traversal: " + binaryTree2.inOrderTraverse());
       System.out.println("Postorder traversal: " + binaryTree2.postOrderTraverse());
       System.out.println("Size: " + binaryTree2.size());
-      System.out.println("Height: " + binaryTree2.height());
+      System.out.println("Depth: " + binaryTree2.depth());
 
       // ---Lab8Assign5 End -------//
 
