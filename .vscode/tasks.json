@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "javac-build",
+      "type": "shell",
+      "command": "javac",
+      "args": ["lab8assign5_template/ReadBinaryTree.java"],
+      "options": {
+        "cwd": "${workspaceFolder}/Lab8Assign5-Template"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$javac"],
+      "presentation": {
+        "reveal": "silent"
+      }
+    }
+  ]
+}
