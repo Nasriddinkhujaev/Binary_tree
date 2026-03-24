@@ -115,6 +115,9 @@ public class BinaryTree<E> {
 
         System.out.println(" ================================");
         System.out.println(exprBT3.height());
+
+        System.out.println(" ================================");
+        System.out.println(BinaryTree.readBinaryTree(new Scanner(System.in))); // system.in is 
     }
 
     /**
@@ -185,7 +188,9 @@ public class BinaryTree<E> {
             return;
         } else {
             // process to next node by calling the function itself
-            if (currentRoot != root && currentRoot != null) { // check if current node is not the root node or currentRoot is not null, if it's not, add 2 spaces before processing the next node
+            if (currentRoot != root && currentRoot != null) { // check if current node is not the root node or
+                                                              // currentRoot is not null, if it's not, add 2 spaces
+                                                              // before processing the next node
                 currentResultSB.append("  ");
             }
             currentResultSB.append(currentRoot.toString()); // add the data of current node to buffer
@@ -317,7 +322,7 @@ public class BinaryTree<E> {
     // add your private recursive counterpart for height
     private int height(Node<E> currentRoot) {
         // add your code
-        
+
         if (currentRoot == null) {
             return 0;
         }
@@ -537,7 +542,11 @@ public class BinaryTree<E> {
      * @param scan the Scanner attached to the input file
      * @return The binary tree
      */
-    public static BinaryTree<String> readBinaryTree(Scanner scan) { // the pur
+    public static BinaryTree<String> readBinaryTree(Scanner scan) { // the purpose of this method is to read a binary
+                                                                    // tree from a file, so the input is a Scanner
+                                                                    // attached to the file. The method returns a
+                                                                    // BinaryTree<String> because the data in the file
+                                                                    // is String type.
         // Read a line and trim leading and trailing spaces.
         String data = scan.nextLine().trim();
         if (data.equals("null")) { // data (i.e. current root node's data) is "null"

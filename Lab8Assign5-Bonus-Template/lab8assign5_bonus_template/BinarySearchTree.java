@@ -354,7 +354,14 @@ public class BinarySearchTree<E extends Comparable<E>>
     private E findSmallestChild(Node<E> parent) {
         
         //-----Lab8Assign5 Bonus HINT ------------//
-        
+        if (parent.left.left == null) {
+            //left child is the smallest item in this BST rooted at parent
+            E returnValue = parent.left.data;
+            
+            return returnValue;
+        } else{
+            return findSmallestChild(parent.left);
+        }
         // code is very similar to findLargestChild
         
         // keep following left branch until reaching the parent of leftmost node
@@ -362,13 +369,13 @@ public class BinarySearchTree<E extends Comparable<E>>
         
         //Note: following line is a stub used to silent compiler. 
         //   You need to change it when you complete your work.
-        return null;
+        
 
     }
 
     //========= Lab8Assign5 Bonus End =======================//    
     
-           
+    
 
     //Other methods in the interface SearchTree
     //   to be implemented by Students.
